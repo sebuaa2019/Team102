@@ -1,4 +1,5 @@
 #include "main.h"
+#include "move.h" 
 void moveback(){
             srvName.request.name = (nState==STATE_GOTO)?strGoto:"master"; //if
             if (cliGetWPName.call(srvName))
