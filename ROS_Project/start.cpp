@@ -1,28 +1,28 @@
 #include "main.h" 
-
-void start(){//Æô¶¯×¼±¸½×¶Î
+#include "start.h"
+void start(){//å¯åŠ¨å‡†å¤‡é˜¶æ®µ
 
 	if(nState == STATE_READY){
-		nDelay ++;//Î¬»¤Ê±¼ä¼ÆÊýÆ÷£¬´ú±íÁËÒÑÓÃµÄ×¼±¸Ê±¼ä
-		if(nDelay > 100){//×¼±¸Ê±¼äÒÑµ½£¬Ä¬ÈÏ×¼±¸ÒÑ¾­Íê³É
-			nDelay = 0;//×¼±¸¼ÆÊ±½áÊø£¬¼ÆÊýÆ÷ÇåÁã
+		nDelay ++;//ç»´æŠ¤æ—¶é—´è®¡æ•°å™¨ï¼Œä»£è¡¨äº†å·²ç”¨çš„å‡†å¤‡æ—¶é—´
+		if(nDelay > 100){//å‡†å¤‡æ—¶é—´å·²åˆ°ï¼Œé»˜è®¤å‡†å¤‡å·²ç»å®Œæˆ
+			nDelay = 0;//å‡†å¤‡è®¡æ—¶ç»“æŸï¼Œè®¡æ•°å™¨æ¸…é›¶
 			AddNewWaypoint("start");
-			nState = STATE_FOLLOW;//×¼±¸Íê³É£¬½øÈë¸úËæ½×¶Î
+			nState = STATE_FOLLOW;//å‡†å¤‡å®Œæˆï¼Œè¿›å…¥è·Ÿéšé˜¶æ®µ
 		}
 	}
 
 }
 
-void follow(){//¸úËæ½×¶Î
+void follow(){//è·Ÿéšé˜¶æ®µ
 
 	if(nState == STATE_FOLLOW){
-		//Èç¹û¼ÆÊýÆ÷Ê±¼äÎª0£¬¾ÍËµÃ÷Æô¶¯×¼±¸¸Õ¸ÕÍê³É
+		//å¦‚æžœè®¡æ•°å™¨æ—¶é—´ä¸º0ï¼Œå°±è¯´æ˜Žå¯åŠ¨å‡†å¤‡åˆšåˆšå®Œæˆ
 		if(nDelay == 0){
-			FollowSwitch(true, 0.7);//ÃüÁî»úÆ÷ÈË½øÈë¸úËæ×´Ì¬
+			FollowSwitch(true, 0.7);//å‘½ä»¤æœºå™¨äººè¿›å…¥è·ŸéšçŠ¶æ€
 		}
-		//Èç¹û¼ÆÊýÆ÷Ê±¼ä²»Îª0£¬ËµÃ÷Æô¶¯ÔçÒÑÍê³É£¬»úÆ÷ÈËÒÑ¾­´¦ÓÚ¸úËæ×´Ì¬
+		//å¦‚æžœè®¡æ•°å™¨æ—¶é—´ä¸ä¸º0ï¼Œè¯´æ˜Žå¯åŠ¨æ—©å·²å®Œæˆï¼Œæœºå™¨äººå·²ç»å¤„äºŽè·ŸéšçŠ¶æ€
 
-		nDelay ++;//Î¬»¤Ê±¼ä¼ÆÊýÆ÷£¬´ú±íÁË´¦ÓÚ¸úËæ×´Ì¬µÄÊ±¼ä
+		nDelay ++;//ç»´æŠ¤æ—¶é—´è®¡æ•°å™¨ï¼Œä»£è¡¨äº†å¤„äºŽè·ŸéšçŠ¶æ€çš„æ—¶é—´
 	}
 
 }
