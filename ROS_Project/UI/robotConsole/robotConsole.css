@@ -1,0 +1,258 @@
+﻿
+/* 全局初始化设置 */
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url('img/background.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 0.8;
+
+}
+/* 顶部样式设置 */
+/* 顶部导航栏左侧样式 */
+#myStyle .navbar-default{
+    margin-top: 10px;
+    border-color: #3379b700;    
+    background: rgba(255, 255, 255, 0); 
+}
+#myStyle .navbar-collapse{
+    position: relative;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 3px;
+    border-color: #337ab7;
+    /* background-color: rgb(149, 218, 250); */
+    background-color: #337ab7;
+    box-sizing: border-box;
+}
+#myStyle .robot_icon{
+    height: 50px;
+    width: 50px;
+    margin-top: -2px;
+    margin-left: 3px;
+    background: url('img/icon.png');
+    background-size: 100%;
+    float: left;
+}
+#myStyle .daohang{
+    margin-left: 5px ;
+}
+#myStyle .daohang li{
+    font-size: 20px;
+    line-height: 50px;
+    border: 3px solid transparent;
+}
+#myStyle .daohang li:hover{
+    border-bottom: 3px solid rgb(253, 249, 5);
+    color:white ;
+    /* background-color: rgb(149, 218, 250); */
+    background-color: #337ab7;
+}
+#myStyle .daohang li a{
+    color:rgb(253, 249, 5) ;
+    font-family: KaiTi;
+    font-size: 24px;
+    font-weight: bold;
+    /* background-color: rgb(149, 218, 250); */
+    background-color: #337ab7;
+}
+/* 站内搜索样式 */
+#myStyle .znss{
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+    right: 170px;
+}
+/* 右侧提示样式 */
+#myStyle .youcenav{
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    right: 20px;   
+}
+#myStyle .youcenav li a{
+    color: white;
+}
+#myStyle .youcenav .help:hover{
+    color: yellow;
+    border-bottom: 3px solid yellow;
+}
+#myStyle .youcenav .dropdown-toggle:hover{
+    color: yellow;
+}
+#myStyle .navbar-nav>.open>a{
+    background-color: transparent;
+}
+#myStyle .navbar-nav>li>.dropdown-menu{
+    margin-top: 2px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-sizing: border-box;
+    margin-right: -7px;  
+}
+#myStyle .navbar-nav>li>.dropdown-menu .menu-contents{
+    color: black;
+}
+/* 左边栏样式 */
+/* 左侧外层导航样式 */
+#myStyle .panel{
+    background-color: transparent;
+    border-width: 2px;
+}
+/* 左侧内层操作控制列表样式 */
+#myStyle .panel-body .list-group-item{
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+#myStyle .panel-body .list-group-item:hover{
+    background-color: #337ab7;
+    color:white;
+    font-weight: bold;
+    font-size: 15px;
+}
+#myStyle .panel-body .active{
+    background-color: #5cb85c;
+    border: 1px solid #ccc;
+    color:white;
+    font-weight: bold;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+#myStyle .panel-body .active:hover{
+    background-color: #5cb85c;
+    border: 1px solid #ccc;
+    color:white;
+    font-weight: bold;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+/* 图标样式控制 */
+#myStyle .icon1{
+    height: 28px;
+    width: 28px;
+    background: url('img/icon1.png');
+    background-size: 100%;
+    float: left;
+    margin-top: -6px;
+    margin-right: 5px;
+    margin-left: -6px;
+}
+#myStyle .icon2{
+    height: 28px;
+    width: 28px;
+    background: url('img/icon2.png');
+    background-size: 100%;
+    float: left;
+    margin-top: -6px;
+    margin-right: 5px;
+    margin-left: -6px;
+}
+#myStyle .icon3{
+    height: 28px;
+    width: 28px;
+    background: url('img/icon3.png');
+    background-size: 100%;
+    float: left;
+    margin-top: -6px;
+    margin-right: 5px;
+    margin-left: -6px;
+}
+
+/* 右侧主体样式 */
+/* 选项卡导航样式 */
+#myStyle .tabbable li a{
+    color:yellow;
+    font-size: 15px;
+    font-weight: bold;
+    border:0px solid #ccc;
+    border-radius: 10px;
+}
+#myStyle .tabbable li.active a{
+    color:white;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #6299c7;
+}
+
+/* 机器人控制信息样式 */
+#myStyle .charts_wrapper{
+    position: relative;
+    height: 550px;
+    width: 100%;
+}
+/* #myStyle .tab-pane .pad{
+    height: 550px;
+    width: 100%;
+} */
+#myStyle .tab-content .gauge{
+    position: absolute;
+    height: 300px;
+    width: 85%;
+    margin: 10px auto;
+    left:8%;
+    /* border: 3px solid white; */
+}
+#myStyle .tab-content .gauge_power{
+    position: absolute;
+    left: 38%;
+    bottom: 2%;
+    height: 200px;
+    width: 25%;
+    /* border: 3px solid white; */
+}
+#myStyle .tab-content .gauge_tempNbattery{
+    position: absolute;
+    left: 8%;
+    height: 200px;
+    width: 25%;
+    bottom: 2%;
+    /* border: 3px solid white; */
+    /* border-radius: 10px; */
+}
+#myStyle .tab-content .gauge_new{
+    position: absolute;
+    left: 68%;
+    bottom: 2%;
+    height: 200px;
+    width: 25%;
+    /* border: 3px solid white; */
+}
+
+
+/* 机器人实时映画样式 */
+#myStyle .kcjs .panel-body{
+    text-indent: 2em;
+}
+#myStyle .liveView{
+    width: 112%;
+    height: 520px;
+    margin-left: -45px;
+    border-radius: 5px;
+    background: url('img/vediotest.gif') no-repeat center center;
+    background-size: 89%;
+    overflow:hidden;
+}
+
+/* 背景样式 */
+#myStyle .well{
+    background-color: transparent;
+}
+
+/* 页脚样式 */
+#myStyle .footer{
+    position: absolute;
+    bottom:-7%;
+    height:30px;
+    width: 100%;
+    color: #999;
+    font-size: 16px;
+    text-align: center;
+    line-height:30px;
+    margin-bottom: 30px;
+    border-top: 1px solid #999;
+}

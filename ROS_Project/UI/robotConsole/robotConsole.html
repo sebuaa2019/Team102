@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>机器人控制面板</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="robotConsole.css">
+</head>
+
+<body>
+    <div class="container" id="myStyle">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <!-- 顶部导航栏 -->
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav daohang">
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right youcenav">
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- 左侧控制台索引部分 -->
+                    <div class="col-md-3 column">
+                        <div class="panelgroup">
+                            <div class="panel panel-success">
+                                <!-- 控制台分类标题 -->
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <div class="icon1"></div>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+                                            基本控制
+                                        </a>
+                                    </h3>
+                                </div>
+                                <!-- 控制台操作项 -->
+                                <div id="collapse0" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <a href="#" class="list-group-item active">机器人运动控制</a>
+                                        <a href="#" class="list-group-item">机械臂运动控制</a>
+                                        <a href="#" class="list-group-item">语音控制</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-danger">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <div class="icon2"></div>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                            异常处理
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <a href="#" class="list-group-item">紧急制动</a>
+                                        <a href="#" class="list-group-item">航点变更</a>
+                                        <a href="#" class="list-group-item">目标位移</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <div class="icon3"></div>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                            一键操作
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <a href="#" class="list-group-item">一键启动</a>
+                                        <a href="#" class="list-group-item">一键取物</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右侧主体部分 -->
+                    <div class="col-md-9 column">                      
+                        <!-- 监控模式切换选项卡 -->
+                        <div class="tabbable" id="tabs-0">
+                            <!-- 选项卡导航 -->
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#panel1" data-toggle="tab">机器人实时画面</a>
+                                </li>
+                            </ul>
+                            <!-- 监控内容设置 -->
+                            <div class="tab-content">
+                                <!-- 机器人实时映画 -->
+                                <div class="tab-pane active well" id="panel1">
+                                    <div class="media well">
+                                        <div class="liveView">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 底部 -->
+                    <div class="footer">
+                        Copyright @2019 Powered by TEAM_102. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script src="chartDisplay.js"></script>
+    <script src="macarons.js"></script>
+    <script src="robotConsole.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
