@@ -11,3 +11,7 @@ npm install (或者cnpm install)
 
 npm run dev
 
+
+# 第一版迭代计划看板
+
+![image](https://github.com/sebuaa2019/Team102/blob/master/images/第一版迭代看板控制.png)
