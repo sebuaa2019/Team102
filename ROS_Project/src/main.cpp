@@ -42,10 +42,10 @@
 
 int main(int argc, char** argv)
 {
-	//ROS初始化
+    //ROS初始化
     ros::init(argc, argv, "wpb_home_shopping");
 
-	//各主题初始化
+    //各主题初始化
     ros::NodeHandle n;
     ros::Subscriber sub_sr = n.subscribe("/xfyun/iat", 10, KeywordCB);
     follow_start = n.serviceClient<wpb_home_tutorials::Follow>("wpb_home_follow/start");
@@ -62,13 +62,13 @@ int main(int argc, char** argv)
     grab_result_sub = n.subscribe<std_msgs::String>("/wpb_home/grab_result",30,&GrabResultCallback);
     pass_result_sub = n.subscribe<std_msgs::String>("/wpb_home/pass_result",30,&PassResultCallback);
 
-	//语音初始化
+    //语音初始化
     InitKeyword();
 
     ROS_WARN("[main] wpb_home_shopping");
     ros::Rate r(30);
 
-	//状态机，循环休眠和唤醒检测
+    //状态机，循环休眠和唤醒检测
     while(ros::ok())
     {
         // 1、刚启动，准备
@@ -92,7 +92,7 @@ int main(int argc, char** argv)
         // 7、将物品给主人
         if(nState == STATE_PASS)PassObj();
         
-		//休眠一次，把控制权交给机器人的其他进程
+	//休眠一次，把控制权交给机器人的其他进程
         ros::spinOnce();
         r.sleep();
     }
