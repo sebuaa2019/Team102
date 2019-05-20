@@ -1,4 +1,5 @@
 #include "main.h"
+#include "move.h"
 #include "ExceptionHandler.h"
 
 void moveto(){
