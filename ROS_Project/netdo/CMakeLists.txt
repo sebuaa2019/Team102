@@ -195,11 +195,21 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+include_directories(
+  ${catkin_INCLUDE_DIRS} include/
+)
+
+link_directories(
+  ${catkin_LIB_DIRS} lib/
+)
 
 add_executable(netmove
+  src/netprotocol.cpp
   src/netmove.cpp
 )
 add_dependencies(netmove ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(netmove
   ${catkin_LIBRARIES}
+  SXXCoreTask
 )
+
