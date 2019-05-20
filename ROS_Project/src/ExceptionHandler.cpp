@@ -33,6 +33,14 @@ void ExceptionHandler::MoveExpHandler(int expNum){
             Speak("Failed to go to the master.");
             nState = STATE_ASK;
             break;
+            
+        case(FOLLOW_START_EXP)://跟随启动失败
+            ROS_WARN("[CActionManager] - follow start failed...");
+            break;
+            
+        case(FOLLOW_STOP_EXP)://跟随终止失败
+            ROS_WARN("[CActionManager] - failed to stop following...");
+            break;
 
         default: ;
     }
