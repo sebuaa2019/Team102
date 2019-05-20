@@ -1,34 +1,34 @@
-//#include<gtest.h>
+#include<gtest.h>
 #include<iostream>
 #include<assert.h>
-//#include"GrabMoniter.h"
+#include"GrabMoniter.h"
 
 
 
 
 TEST(GrabSwitch, my_test_1) {
-   //¿ªÆô×¥È¡Ä£Ê½
+   //å¼€å¯æŠ“å–æ¨¡å¼
    GrabSwitch(true);
    assert(behavior_msg.data == "grab start");
-   //¹Ø±Õ×¥È¡Ä£Ê½
+   //å…³é—­æŠ“å–æ¨¡å¼
    GrabSwitch(false);
    assert(behavior_msg.data == "grab stop");
 }
 
 TEST(PassSwitch, my_test_2) {
-   //¿ªÆô×¥È¡Ä£Ê½
+   //å¼€å¯æŠ“å–æ¨¡å¼
    PassSwitch(true);
    assert(behavior_msg.data == "pass start");
-   //¹Ø±Õ×¥È¡Ä£Ê½
+   //å…³é—­æŠ“å–æ¨¡å¼
    PassSwitch(false);
    assert(behavior_msg.data == "pass stop");
 }
 
 TEST(PassSwitch, my_test_3) {
-   //¿ªÆôµİ¸øÄ£Ê½
+   //å¼€å¯é€’ç»™æ¨¡å¼
    PassSwitch(true);
    assert(behavior_msg.data == "pass start");
-   //¹Ø±Õµİ¸øÄ£Ê½
+   //å…³é—­é€’ç»™æ¨¡å¼
    PassSwitch(false);
    assert(behavior_msg.data == "pass stop");
 }
@@ -36,10 +36,10 @@ TEST(PassSwitch, my_test_3) {
 TEST(GrabResultCallback, my_test_4) {
    const std_msgs::String::ConstPtr& res1 = "done";
    const std_msgs::String::ConstPtr& res2 = "not yet";
-   //Î´´«µİÍê³ÉĞÅÏ¢
+   //æœªä¼ é€’å®Œæˆä¿¡æ¯
    GrabResultCallback(res2);
    assert(bGrabDone != true);
-   //´«µİÍê³ÉĞÅÏ¢
+   //ä¼ é€’å®Œæˆä¿¡æ¯
    GrabResultCallback(res1);
    assert(bGrabDone == true);
 }
@@ -47,30 +47,30 @@ TEST(GrabResultCallback, my_test_4) {
 TEST(PassResultCallback, my_test_5) {
    const std_msgs::String::ConstPtr& res1 = "done";
    const std_msgs::String::ConstPtr& res2 = "not yet";
-   //Î´´«µİÍê³ÉĞÅÏ¢
+   //æœªä¼ é€’å®Œæˆä¿¡æ¯
    PassResultCallback(res2);
    assert(bPassDone != true);
-   //´«µİÍê³ÉĞÅÏ¢
+   //ä¼ é€’å®Œæˆä¿¡æ¯
    PassResultCallback(res1);
    assert(bPassDone == true);
 }
 
 TEST(GrabObj, my_test_6) {
-    //¿ªÊ¼×¥È¡¶¯×÷Ç°
+    //å¼€å§‹æŠ“å–åŠ¨ä½œå‰
     nDelay = 0;
     bGrabDone = false;
     GrabObj();
     assert(bGrabDone == false);
     assert(nDelay == 1);
 
-    //½øĞĞ×¥È¡¶¯×÷ÖĞ
+    //è¿›è¡ŒæŠ“å–åŠ¨ä½œä¸­
     nDelay = 10;
     bGrabDone = false;
     GrabObj();
     assert(bGrabDone == false);
     assert(nDelay == 11);
 
-    //½áÊø×¥È¡¶¯×÷
+    //ç»“æŸæŠ“å–åŠ¨ä½œ
     nDelay = 10;
     bGrabDone = true;
     GrabObj();
@@ -79,21 +79,21 @@ TEST(GrabObj, my_test_6) {
 }
 
 TEST(PassObj(), my_test_6) {
-    //¿ªÊ¼µİ¸ø¶¯×÷Ç°
+    //å¼€å§‹é€’ç»™åŠ¨ä½œå‰
     nDelay = 0;
     bPassDone = false;
     PassObj();
     assert(bPassDone == false);
     assert(nDelay == 1);
 
-    //½øĞĞµİ¸ø¶¯×÷ÖĞ
+    //è¿›è¡Œé€’ç»™åŠ¨ä½œä¸­
     nDelay = 10;
     bPassDone = false;
     PassObj();
     assert(bPassDone == false);
     assert(nDelay == 11);
 
-    //½áÊøµİ¸ø¶¯×÷
+    //ç»“æŸé€’ç»™åŠ¨ä½œ
     nDelay = 10;
     bPassDone = true;
     PassObj();
