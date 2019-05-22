@@ -1,6 +1,6 @@
-#include "main.h" 
-#include "start.h" 
-#include "ExceptionHandler.h" 
+#include <main.hpp>
+#include <start.hpp>
+#include <ExceptionHandler.hpp>
 
 // 跟随模式开关
 static void FollowSwitch(bool inActive, float inDist){

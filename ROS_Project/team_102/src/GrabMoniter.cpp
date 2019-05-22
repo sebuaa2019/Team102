@@ -1,5 +1,6 @@
-#include "main.h"
-#include "GrabMoniter.h"
+#include <main.hpp>
+#include <GrabMoniter.hpp>
+#include <voice.hpp>
 
 // 物品抓取模式开关
 static void GrabSwitch(bool inActive)

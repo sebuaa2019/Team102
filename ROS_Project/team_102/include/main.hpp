@@ -27,33 +27,30 @@ using namespace std;
 #define STATE_PASS      6
 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
-static string strGoto;
-static sound_play::SoundRequest spk_msg;
-static ros::Publisher spk_pub;
-static ros::Publisher vel_pub;
-static string strToSpeak = "";
-static string strKeyWord = "";
-static ros::ServiceClient clientIAT;
-static xfyun_waterplus::IATSwitch srvIAT;
-static ros::ServiceClient cliGetWPName;
-static waterplus_map_tools::GetWaypointByName srvName;
-static ros::Publisher add_waypoint_pub;
-static ros::ServiceClient follow_start;
-static ros::ServiceClient follow_stop;
-static ros::ServiceClient follow_resume;
-static wpb_home_tutorials::Follow srvFlw;
-static ros::Publisher behaviors_pub;
-static std_msgs::String behavior_msg;
+extern string strGoto;
+extern sound_play::SoundRequest spk_msg;
+extern ros::Publisher spk_pub;
+extern ros::Publisher vel_pub;
+extern string strToSpeak = "";
+extern string strKeyWord = "";
+extern ros::ServiceClient clientIAT;
+extern xfyun_waterplus::IATSwitch srvIAT;
+extern ros::ServiceClient cliGetWPName;
+extern waterplus_map_tools::GetWaypointByName srvName;
+extern ros::Publisher add_waypoint_pub;
+extern ros::ServiceClient follow_start;
+extern ros::ServiceClient follow_stop;
+extern ros::ServiceClient follow_resume;
+extern wpb_home_tutorials::Follow srvFlw;
+extern ros::Publisher behaviors_pub;
+extern std_msgs::String behavior_msg;
+extern ros::Subscriber grab_result_sub;
+extern ros::Subscriber pass_result_sub;
+extern bool bGrabDone;
+extern bool bPassDone;
+extern int nState = STATE_READY;
+extern int nDelay = 0;
+extern vector<string> arKeyword;
 
-static ros::Subscriber grab_result_sub;
-static ros::Subscriber pass_result_sub;
-static bool bGrabDone;
-static bool bPassDone;
-
-static int nState = STATE_READY;
-static int nDelay = 0;
-
-static vector<string> arKeyword;
-
-
+e
 #endif // MAIN_H_INCLUDED

@@ -1,6 +1,6 @@
-#include "main.h" 
-#include "voice.h"
-#include "start.h"
+#include <main.hpp>
+#include <voice.hpp>
+#include <start.hpp>
 
 // 添加航点关键词
 void InitKeyword()

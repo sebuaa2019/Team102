@@ -1,6 +1,7 @@
-#include "main.h"
-#include "move.h"
-#include "ExceptionHandler.h"
+#include <main.hpp>
+#include <move.hpp>
+#include <ExceptionHandler.hpp>
+#include <voice.hpp>
 
 void moveto(){
         srvName.request.name = strGoto;

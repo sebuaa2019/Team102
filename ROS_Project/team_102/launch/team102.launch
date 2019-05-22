@@ -2,7 +2,7 @@
 
   <arg name="model" default="$(find wpb_home_bringup)/urdf/wpb_home_mani.urdf"/>
   <arg name="gui" default="true" />
-  <arg name="rvizconfig" default="$(find wpb_home_apps)/rviz/slam_mani.rviz" />
+  <arg name="rvizconfig" default="$(find team_102)/rviz/slam_mani.rviz" />
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
   <param name="use_gui" value="$(arg gui)"/> 

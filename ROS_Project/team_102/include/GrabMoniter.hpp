@@ -1,5 +1,5 @@
-#ifndef _GET_OBJ_
-#define _GET_OBJ_
+#ifndef __GRAB_MONITER_HPP__
+#define __GRAB_MONITER_HPP__
 
 static void GrabSwitch(bool inActive); 
 static void PassSwitch(bool inActive);
