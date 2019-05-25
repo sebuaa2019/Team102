@@ -3,10 +3,9 @@
 
 void InitKeyword();
 void KeywordCB(const std_msgs::String::ConstPtr & msg);
-static void FollowSwitch(bool inActive, float inDist);
-void Speak(string inStr);
-void AddNewWaypoint(string inStr);
-static string FindKeyword(string inSentence);
+void FollowSwitch(bool inActive, float inDist);
+void Speak(std::string inStr);
+void AddNewWaypoint(std::string inStr);
 void InitKeyword();
 
 #endif // VOICE_H_INCLUDED

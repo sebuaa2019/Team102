@@ -118,6 +118,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
+  include ${catkin_INCLUDE_DIRS}
 # include
 # ${catkin_INCLUDE_DIRS}
 )
@@ -199,3 +200,18 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+
+add_executable(main
+  src/main.cpp
+  src/move.cpp
+  src/GrabMoniter.cpp 
+  src/ExceptionHandler.cpp 
+  src/GrabMoniter.cpp 
+  src/start.cpp 
+  src/voice.cpp 
+)
+add_dependencies(main ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(main
+  ${catkin_LIBRARIES}
+)

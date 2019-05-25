@@ -31,8 +31,8 @@ extern string strGoto;
 extern sound_play::SoundRequest spk_msg;
 extern ros::Publisher spk_pub;
 extern ros::Publisher vel_pub;
-extern string strToSpeak = "";
-extern string strKeyWord = "";
+extern string strToSpeak;
+extern string strKeyWord;
 extern ros::ServiceClient clientIAT;
 extern xfyun_waterplus::IATSwitch srvIAT;
 extern ros::ServiceClient cliGetWPName;
@@ -48,9 +48,9 @@ extern ros::Subscriber grab_result_sub;
 extern ros::Subscriber pass_result_sub;
 extern bool bGrabDone;
 extern bool bPassDone;
-extern int nState = STATE_READY;
-extern int nDelay = 0;
+extern int nState;
+extern int nDelay;
 extern vector<string> arKeyword;
 
-e
+
 #endif // MAIN_H_INCLUDED

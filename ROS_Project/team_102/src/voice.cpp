@@ -29,7 +29,7 @@ static string FindKeyword(string inSentence)
 }
 
 // 将机器人当前位置保存为新航点
-void AddNewWaypoint(string inStr)
+void AddNewWaypoint(std::string inStr)
 {
     tf::TransformListener listener;
     tf::StampedTransform transform;

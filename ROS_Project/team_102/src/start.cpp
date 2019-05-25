@@ -1,9 +1,10 @@
 #include <main.hpp>
 #include <start.hpp>
+#include <voice.hpp>
 #include <ExceptionHandler.hpp>
 
 // 跟随模式开关
-static void FollowSwitch(bool inActive, float inDist){
+void FollowSwitch(bool inActive, float inDist){
 	
     if(inActive == true){//命令机器人进入跟随状态 
         srvFlw.request.thredhold = inDist;
