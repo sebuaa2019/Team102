@@ -24,7 +24,7 @@
   <!-- Run wpb_home core -->
   <node pkg="wpb_home_bringup" type="wpb_home_core" name="wpb_home_core" output="screen">
     <param name="serial_port" type="string" value="/dev/ftdi"/> 
-    <rosparam file="$(find wpb_home_bringup)/config/wpb_home.yaml" command="load" />
+    <rosparam file="$(find team_102)/cfg/parameters.yaml" command="load" />
   </node>
 
   <!--- Run Rplidar -->
@@ -155,6 +155,6 @@
   <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py"/>
 
   <!-- Run script -->
-  <node pkg="team_102" type="main" name="main" output="screen"/>
+  <node pkg="team_102" type="rosStatusChecker" name="rosStatusChecker" output="screen"/>
 
 </launch>

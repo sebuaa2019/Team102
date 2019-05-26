@@ -7,6 +7,7 @@ project(team_102)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+SET(CMAKE_CXX_STANDARD 11)
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs 
   pcl_conversions pcl_ros 
   cv_bridge image_transport tf 
@@ -123,6 +124,10 @@ include_directories(
 # ${catkin_INCLUDE_DIRS}
 )
 
+link_directories(
+  ${catkin_LIB_DIRS} lib/
+)
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/team_102.cpp
@@ -205,13 +210,21 @@ include_directories(
 add_executable(main
   src/main.cpp
   src/move.cpp
-  src/GrabMoniter.cpp 
+  src/GrabMonitor.cpp 
   src/ExceptionHandler.cpp 
-  src/GrabMoniter.cpp 
   src/start.cpp 
   src/voice.cpp 
 )
 add_dependencies(main ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(main
+  ${catkin_LIBRARIES}
+  SXXCoreTask
+)
+
+add_executable(rosStatusChecker
+  src/rosStatusChecker.cpp
+)
+add_dependencies(rosStatusChecker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(rosStatusChecker
   ${catkin_LIBRARIES}
 )
