@@ -198,7 +198,8 @@
 
 					<script>
 						function robotDo(type) {
-							alert("收到建图指令，您的小可爱已经准备好啦，麻烦主人带我绕一圈房间，顺便设置取物点哦，啵啵啵！");
+							/*
+							alert("收到建图指令，您的小可爱已经准备好啦，麻烦主人带我绕一圈房间，顺便设置取物点哦！");
 							alert("您的小可爱已经在建图啦，麻烦主人耐心领我在房间里绕一圈哦");
 							alert("主人，一心不能二用哦，麻烦主人等我干完手头的事再下新命令qwq");
 
@@ -207,17 +208,33 @@
 							alert("主人想让我去哪里或者拿什么东西吗？可以直接跟我说ヽ(✿ﾟ▽ﾟ)ノ");
 
 							alert("主人我停下惹！");
+							*/
 
-						$.get("http://10.136.117.172:1345/" + type, function(result) {
+						$.ajax({url: "http://10.136.82.54:1345/" + type, async: false, type: "GET", data: {}, success: function(result) {
+							if(result == "MapSuccess"){
+								alert("收到建图指令，您的小可爱已经准备好啦，麻烦主人带我绕一圈房间，顺便设置取物点哦！");
+							}
+							else if(result == "AlreadyReading"){
+								alert("您的小可爱已经在建图啦，麻烦主人耐心领我在房间里绕一圈哦");
+							}
+							else if(result == "AppointSuccess"){
+								alert("收到指派指令，主人想取什么东西呢？直接告诉我吧~");
+							}
+							else if(result == "AlreadyAppoint"){
+								alert("收到指派指令，已经停止建图，主人想让我去哪里或者拿什么东西吗？可以直接跟我说ヽ(✿ﾟ▽ﾟ)ノ");
+							}
+							else if(result == "killsuccess"){
+								alert("急停成功惹！");
+							}
 							//alert("操作结果");
-						});
+						}});
 						}
 					</script>
 
 					<h4 class="sub-tittle_w3ls">地图扫描</h4>
 					<p>帮助机器人完成地图初始化工作，在新场地中第一次使用机器人时必须首先完成。<br/>前置条件：完整配置系统，激光雷达正常运行</p>
 					<p>
-						<a class="btn btn-secondary view" onclick="javascript:robotDo('back')" role="button">启动地图扫描</a>
+						<a class="btn btn-secondary view" onclick="javascript:robotDo('mapScanning')" role="button">启动地图扫描</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
@@ -229,7 +246,7 @@
 					<h4 class="sub-tittle_w3ls">指派前往</h4>
 					<p>此功能使机器人根据指令，避开障碍物顺利到达指定地点。<br/>前置条件：完整配置系统，已获得仓库地图</p>
 					<p>
-						<a class="btn btn-secondary view" onclick="javascript:robotDo('forward')" role="button">指派前往指定地点</a>
+						<a class="btn btn-secondary view" onclick="javascript:robotDo('appoint')" role="button">指派前往指定地点</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
@@ -241,7 +258,7 @@
 					<h4 class="sub-tittle_w3ls">紧急停机</h4>
 					<p>使机器人紧急停机，此急停属于软急停，当遇到紧急情况时可以使用。<br/>前置条件：完整配置系统</p>
 					<p>
-						<a class="btn btn-secondary view" onclick="javascript:robotDo('stop')" role="button">启动紧急停机</a>
+						<a class="btn btn-secondary view" onclick="javascript:robotDo('kill')" role="button">启动紧急停机</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
