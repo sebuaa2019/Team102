@@ -18,7 +18,7 @@ TEST(moveto, test_no_waypoint) {
     cliGetWPName.call(srvName) = true;
     moveto();
     assert(nState == STATE_ASK);
-}
+}*/
 
 TEST(moveto, test_success_to) {
 
@@ -27,7 +27,7 @@ TEST(moveto, test_success_to) {
     moveto();
     assert(nState == STATE_GRAB);
     assert(nDelay == 0);
-}*/
+}
 
 TEST(moveback, test_no_master) {
 
@@ -43,7 +43,7 @@ TEST(moveback, test_no_master) {
     cliGetWPName.call(srvName) = true;
     moveback();
     assert(nState == STATE_ASK);
-}
+}*/
 
 TEST(moveback, test_success_back) {
 
@@ -52,7 +52,7 @@ TEST(moveback, test_success_back) {
     moveback();
     assert(nState == STATE_PASS);
     assert(nDelay == 0);
-}*/
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
