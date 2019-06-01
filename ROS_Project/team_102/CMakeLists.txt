@@ -8,6 +8,7 @@ project(team_102)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 SET(CMAKE_CXX_STANDARD 11)
+add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs 
   pcl_conversions pcl_ros 
   cv_bridge image_transport tf 
@@ -210,11 +211,16 @@ link_directories(
 add_executable(main
   src/main.cpp
   src/move.cpp
-  src/GrabMonitor.cpp 
+  src/GrabMoniter.cpp 
   src/ExceptionHandler.cpp 
+  src/GrabMoniter.cpp 
   src/start.cpp 
   src/voice.cpp 
 )
+
+#SET(CXX_FLAGS ${CXX_FLAGS} -std=gnu++11)
+
+
 add_dependencies(main ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(main
   ${catkin_LIBRARIES}

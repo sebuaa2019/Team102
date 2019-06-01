@@ -24,7 +24,7 @@ ros::Publisher add_waypoint_pub;
 ros::ServiceClient follow_start;
 ros::ServiceClient follow_stop;
 ros::ServiceClient follow_resume;
-wpb_home_tutorials::Follow srvFlw;
+
 ros::Publisher behaviors_pub;
 std_msgs::String behavior_msg;
 ros::Subscriber grab_result_sub;
@@ -91,14 +91,62 @@ int main(int argc, char** argv)
     pass_result_sub = n.subscribe<std_msgs::String>("/wpb_home/pass_result",30,&PassResultCallback);
 
     int sock;
-    connectServer(sock, SERVER_IP, SERVER_PORT);
-    SCT::Source sock_source = SCT::Source(SCT::Source::Type::READ, sock, 0, 0, mainq);
-    sock_source.setEventHandler([] {
+    int ret = connectServer(sock, SERVER_IP, SERVER_PORT);
+    //assert(ret >= 0);
+    SCT::Source sock_source = SCT::Source(SCT::Source::Type::READ, sock, 0, mainq);
+    sock_source.setEventHandler([sock, write_port] {
         void *pdata = NULL;
         int length;
         retrieveData(sock, pdata, length);
         
         //do somthing here via network
+        static const char *stopImm = "kill";
+        static const char *reFollow = "mapScanning";
+        static const char *appoint= "appoint";
+
+        printf("received: %s %d\n", pdata, length);
+        #define strcmp(p1, p2)
+        
+        if (strncmp(static_cast<const char *>(pdata), reFollow, length) == 0) {
+            if (nState == STATE_GOTO || nState == STATE_COMEBACK) {
+                cancelMove();
+            }
+            if (nState != STATE_FOLLOW) {
+                static const char str[] = "1";
+                sendData(sock, str, sizeof(str));
+            } else {
+                static const char str[] = "0";
+                sendData(sock, str, sizeof(str));
+            }
+            nState = STATE_FOLLOW;
+        } else if (strncmp(static_cast<const char *>(pdata), appoint, length) == 0) {
+            if (nState == STATE_FOLLOW) {
+                stopFollowAndSetMaster();
+                static const char str[] = "1";
+                sendData(sock, str, sizeof(str));
+            } else {
+                static const char str[] = "0";
+                sendData(sock, str, sizeof(str));
+            }
+        } 
+        else if(strncmp(static_cast<const char *>(pdata), stopImm, length) == 0) {
+                geometry_msgs::Twist vel_cmd;
+
+                vel_cmd.linear.x = 0;
+                vel_cmd.linear.y = 0;
+                vel_cmd.linear.z = 0;
+
+                vel_cmd.angular.x = 0;
+                vel_cmd.angular.y = 0;
+                vel_cmd.angular.z = 0;
+                //for (int i = 0; i < 100; i++) {
+                vel_pub.publish(vel_cmd);
+                //}
+                
+                ros::shutdown();
+                    static const char killall[] = "killall";
+    sendData(write_port, killall, sizeof(killall));
+        }
 
         if (pdata != NULL) {
             free(pdata);

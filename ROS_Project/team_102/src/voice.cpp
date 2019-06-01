@@ -65,6 +65,16 @@ void Speak(string inStr)
     spk_pub.publish(spk_msg);
 }
 
+void stopFollowAndSetMaster() {
+
+    FollowSwitch(false, 0);
+    AddNewWaypoint("master");
+    nState = STATE_ASK;
+    nDelay = 0;
+    Speak("OK. What do you want me to fetch?");
+
+}
+
 // 语音识别结果处理函数
 void KeywordCB(const std_msgs::String::ConstPtr & msg)
 {
@@ -84,13 +94,8 @@ void KeywordCB(const std_msgs::String::ConstPtr & msg)
 
         // 停止跟随的指令
         int nFindIndex = msg->data.find("top follow");
-        if(nFindIndex >= 0)
-        {
-            FollowSwitch(false, 0);
-            AddNewWaypoint("master");
-            nState = STATE_ASK;
-            nDelay = 0;
-            Speak("OK. What do you want me to fetch?");
+        if (nFindIndex >= 0) {
+            stopFollowAndSetMaster();
         }
     }
 

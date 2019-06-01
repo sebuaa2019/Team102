@@ -46,7 +46,7 @@ static inline int retrieveData(int fd, void *&pdata, int &length) {
     return 0;
 }
 
-static inline int sendData(int fd, void *pdata, int length) {
+static inline int sendData(int fd, const void *pdata, int length) {
     struct ProtocolHeader header;
     header.check = 0xdeadbeef;
     header.packet_length = length;

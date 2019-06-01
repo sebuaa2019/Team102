@@ -3,6 +3,8 @@
 #include <voice.hpp>
 #include <ExceptionHandler.hpp>
 
+wpb_home_tutorials::Follow srvFlw;
+
 // 跟随模式开关
 void FollowSwitch(bool inActive, float inDist){
 	

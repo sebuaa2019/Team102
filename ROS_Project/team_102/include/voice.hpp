@@ -7,5 +7,6 @@ void FollowSwitch(bool inActive, float inDist);
 void Speak(std::string inStr);
 void AddNewWaypoint(std::string inStr);
 void InitKeyword();
+void stopFollowAndSetMaster();
 
 #endif // VOICE_H_INCLUDED

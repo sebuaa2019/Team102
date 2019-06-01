@@ -3,5 +3,6 @@
 
 void moveto();
 void moveback();
+void cancelMove();
 
 #endif // MOVE_H_INCLUDED
