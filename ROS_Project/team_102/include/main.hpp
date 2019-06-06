@@ -1,7 +1,6 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
-
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 #include "wpb_home_tutorials/Follow.h"
@@ -16,8 +15,6 @@
 #include <tf/transform_listener.h>
 #include <geometry_msgs/PoseStamped.h>
 
-using namespace std;
-
 #define STATE_READY     0
 #define STATE_FOLLOW    1
 #define STATE_ASK       2
@@ -25,6 +22,49 @@ using namespace std;
 #define STATE_GRAB      4
 #define STATE_COMEBACK  5
 #define STATE_PASS      6
+
+class Request {
+	int src[3];
+	int dst[3];
+	enum {
+		STEERING,
+		GRAB,
+	} requestType;
+	GrabbedItems item;
+public:
+    Request(int *src, int *dst, int type);
+	static bool speech(char *fp);
+
+	bool readSpeechPattern(pattern p);
+	int *getSrc();
+	int *getDst();
+	bool hasitm();
+};
+
+class Monitor {
+	static int counter;
+public:
+	static enum {
+		STATUS_IDLE,
+		STATUS_BUSY,
+		STATUS_INSERVE,
+	};
+	static void move();
+	static void stop();
+	static void resetCounter();
+	static void status();
+	static float distance();
+};
+
+class ExceptionHandler {
+public:
+	enum {
+		OVERFLOW_EXCEPTION,
+		TURN_SIDE_EXCEPTION,
+		NO_PATH_EXCEPTION,
+	};
+	static ExceptionHandler exception(int type);
+};
 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 extern string strGoto;

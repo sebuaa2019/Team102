@@ -30,7 +30,6 @@ void start(){//启动准备阶段
 		AddNewWaypoint("start");
 		nState = STATE_FOLLOW;//准备完成，进入跟随阶段
 	}
-
 }
 
 void follow(){//跟随阶段
@@ -44,3 +43,13 @@ void follow(){//跟随阶段
 
 }
 
+class Graph {
+	static int MAP_SIZE;
+	std::vector<int> graph;
+public:
+	static void loadMap();
+	static bool hasObstacle();
+	static void setDestination();
+	static void isDestination();
+	static void setFree();
+};

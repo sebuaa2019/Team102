@@ -25,9 +25,6 @@ bool isQueueRunning = false;
 static void genericMove(std::string str, std::function<void(bool isSucceeded)> resultHandler, std::function<void()> errorHandler){
     srvName.request.name = str;
 
-    // SCT_once_t once;
-    // SCT_once_f(&once, NULL, ac_init);
-    // cancel_flag = false;
     if (!isQueueRunning)
     moveq.async([resultHandler, errorHandler] {
         isQueueRunning = true;

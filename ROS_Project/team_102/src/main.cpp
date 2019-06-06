@@ -40,6 +40,23 @@ extern "C" void SCT_main_queue_drain_np();
 #define SERVER_IP "10.136.82.54"
 #define SERVER_PORT 13246
 
+ExceptionHandler ExceptionHandler::exception(int type) {
+    printf("Exception happened: %d\n", type);
+    abort();
+}
+
+Request::Request(int *src, int *dst, int type) {
+    this->src[0] = src[0];
+    this->src[1] = src[1];
+    this->src[2] = src[2];
+
+    this->dst[0] = dst[0];
+    this->dst[1] = dst[1];
+    this->dst[2] = dst[2];
+
+    this->type = type;
+}
+
 int main(int argc, char** argv)
 {
     //ROS初始化

@@ -127,20 +127,20 @@ printf("1\n");
             }
         }); 
     }
-printf("1\n");
-    
+    printf("1\n");
+        
 
-//    qnetwork.sync([&qserver]{
-//        int sock;
-//        int ret = connectServer(sock, SERVER_IP, SERVER_PORT);
+    //    qnetwork.sync([&qserver]{
+    //        int sock;
+    //        int ret = connectServer(sock, SERVER_IP, SERVER_PORT);
 
- //       if (ret == -1) {
- ///           printf("Server not available.\n");
- //           return;
- //       }
- //   });
+    //       if (ret == -1) {
+    ///           printf("Server not available.\n");
+    //           return;
+    //       }
+    //   });
 
-printf("1\n");
+    printf("1\n");
     qchecker.sync([&ss, s, &exitSem, envs]{
 
         struct timespec ts;
@@ -190,6 +190,7 @@ int main(int argc, char **argv, char **envs) {
 
     while (1) {
         loop(argc, argv, envs);
+        sleep(15);
         printf("daemon restart\n");
     }
     return 0;
