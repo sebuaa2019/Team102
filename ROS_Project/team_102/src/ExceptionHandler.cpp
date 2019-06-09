@@ -38,6 +38,12 @@ void ExceptionHandler::MoveExpHandler(int expNum){
             ROS_WARN("[CActionManager] - failed to stop following...");
             break;
 
+        case(GRAB_FAIL):
+            ROS_ERROR("Failed to grab something");
+            Speak("I haven't get the object.");
+            nState = STATE_GRAB;
+            break;
+            
         default: ;
     }
 }
