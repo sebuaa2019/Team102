@@ -23,32 +23,15 @@
 #define STATE_COMEBACK  5
 #define STATE_PASS      6
 
-class Request {
-	int src[3];
-	int dst[3];
-	enum {
-		STEERING,
-		GRAB,
-	} requestType;
-	GrabbedItems item;
-public:
-    Request(int *src, int *dst, int type);
-	static bool speech(char *fp);
-
-	bool readSpeechPattern(pattern p);
-	int *getSrc();
-	int *getDst();
-	bool hasitm();
-};
-
 class Monitor {
 	static int counter;
-public:
 	static enum {
 		STATUS_IDLE,
 		STATUS_BUSY,
 		STATUS_INSERVE,
-	};
+	} _status;
+public:
+	
 	static void move();
 	static void stop();
 	static void resetCounter();
@@ -56,23 +39,13 @@ public:
 	static float distance();
 };
 
-class ExceptionHandler {
-public:
-	enum {
-		OVERFLOW_EXCEPTION,
-		TURN_SIDE_EXCEPTION,
-		NO_PATH_EXCEPTION,
-	};
-	static ExceptionHandler exception(int type);
-};
-
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
-extern string strGoto;
+extern std::string strGoto;
 extern sound_play::SoundRequest spk_msg;
 extern ros::Publisher spk_pub;
 extern ros::Publisher vel_pub;
-extern string strToSpeak;
-extern string strKeyWord;
+extern std::string strToSpeak;
+extern std::string strKeyWord;
 extern ros::ServiceClient clientIAT;
 extern xfyun_waterplus::IATSwitch srvIAT;
 extern ros::ServiceClient cliGetWPName;
@@ -90,7 +63,7 @@ extern bool bGrabDone;
 extern bool bPassDone;
 extern int nState;
 extern int nDelay;
-extern vector<string> arKeyword;
+extern std::vector<std::string> arKeyword;
 
 
 #endif // MAIN_H_INCLUDED

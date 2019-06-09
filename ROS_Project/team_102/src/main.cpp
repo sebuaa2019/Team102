@@ -10,6 +10,8 @@
 #include <SXXCoreTask/CoreTask.hpp>
 #include <ctools.hpp>
 
+using namespace std;
+
 string strGoto;
 sound_play::SoundRequest spk_msg;
 ros::Publisher spk_pub;
@@ -45,7 +47,7 @@ ExceptionHandler ExceptionHandler::exception(int type) {
     abort();
 }
 
-Request::Request(int *src, int *dst, int type) {
+Request::Request(int *src, int *dst, int type) : item(src[0], src[1], src[2], type) {
     this->src[0] = src[0];
     this->src[1] = src[1];
     this->src[2] = src[2];
@@ -53,8 +55,6 @@ Request::Request(int *src, int *dst, int type) {
     this->dst[0] = dst[0];
     this->dst[1] = dst[1];
     this->dst[2] = dst[2];
-
-    this->type = type;
 }
 
 int main(int argc, char** argv)
@@ -62,17 +62,31 @@ int main(int argc, char** argv)
     //ROS初始化
     ros::init(argc, argv, "team102_NULL");
 
+    bool no_daemon = false;
+
+    for (int i = 0; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "--no-daemon") {
+            no_daemon = true;
+            break;
+        }
+    }
+
+    
+
     int read_port = -1, write_port = -1;
     static std::string read_port_prefix = "--read-port=";
     static std::string write_port_prefix = "--write-port=";
-    for (int i = 0; i < argc; i++) {
-        std::string arg = argv[i];
-        if (arg.find(read_port_prefix) == 0) {
-            auto port_str = arg.substr(read_port_prefix.size());
-            read_port = atoi(port_str.c_str());
-        } else if (arg.find(write_port_prefix) == 0) {
-            auto port_str = arg.substr(write_port_prefix.size());
-            write_port = atoi(port_str.c_str());
+    if (!no_daemon) {
+        for (int i = 0; i < argc; i++) {
+            std::string arg = argv[i];
+            if (arg.find(read_port_prefix) == 0) {
+                auto port_str = arg.substr(read_port_prefix.size());
+                read_port = atoi(port_str.c_str());
+            } else if (arg.find(write_port_prefix) == 0) {
+                auto port_str = arg.substr(write_port_prefix.size());
+                write_port = atoi(port_str.c_str());
+            }
         }
     }
 
@@ -87,7 +101,6 @@ int main(int argc, char** argv)
     pipe_timer.setEventHandler([write_port] {
         char s[] = "heart";
         sendData(write_port, s, sizeof(s));
-        //printf("send heart from node\n");
     });
     
     //各主题初始化
@@ -111,6 +124,11 @@ int main(int argc, char** argv)
     int ret = connectServer(sock, SERVER_IP, SERVER_PORT);
     //assert(ret >= 0);
     SCT::Source sock_source = SCT::Source(SCT::Source::Type::READ, sock, 0, mainq);
+
+    sock_source.setCancelHandler([] {
+        printf("Offline mode\n");
+    });
+
     sock_source.setEventHandler([sock, write_port] {
         void *pdata = NULL;
         int length;
@@ -147,22 +165,22 @@ int main(int argc, char** argv)
             }
         } 
         else if(strncmp(static_cast<const char *>(pdata), stopImm, length) == 0) {
-                geometry_msgs::Twist vel_cmd;
+            geometry_msgs::Twist vel_cmd;
 
-                vel_cmd.linear.x = 0;
-                vel_cmd.linear.y = 0;
-                vel_cmd.linear.z = 0;
+            vel_cmd.linear.x = 0;
+            vel_cmd.linear.y = 0;
+            vel_cmd.linear.z = 0;
 
-                vel_cmd.angular.x = 0;
-                vel_cmd.angular.y = 0;
-                vel_cmd.angular.z = 0;
-                //for (int i = 0; i < 100; i++) {
-                vel_pub.publish(vel_cmd);
-                //}
-                
-                ros::shutdown();
-                    static const char killall[] = "killall";
-    sendData(write_port, killall, sizeof(killall));
+            vel_cmd.angular.x = 0;
+            vel_cmd.angular.y = 0;
+            vel_cmd.angular.z = 0;
+            //for (int i = 0; i < 100; i++) {
+            vel_pub.publish(vel_cmd);
+            //}
+            
+            ros::shutdown();
+            static const char killall[] = "killall";
+            sendData(write_port, killall, sizeof(killall));
         }
 
         if (pdata != NULL) {

@@ -7,7 +7,7 @@ class GrabbedItems {
 	int position[3];
 	int weight;
 public:
-	GrabbedItems(int x, int y, int z, int weight);
+	GrabbedItems(int x, int y, int z, int weight){};
 	static void getPosition();
 };
 
@@ -20,6 +20,24 @@ public:
 
     static void GrabObj();
     static void PassObj();
+};
+
+class Request {
+	int src[3];
+	int dst[3];
+	enum {
+		STEERING,
+		GRAB,
+	} requestType;
+	GrabbedItems item;
+public:
+    Request(int *src, int *dst, int type);
+	static bool speech(char *fp);
+
+	bool readSpeechPattern(int p);
+	int *getSrc();
+	int *getDst();
+	bool hasitm();
 };
 
 void GrabResultCallback(const std_msgs::String::ConstPtr& res);

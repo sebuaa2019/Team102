@@ -2,6 +2,13 @@
 #define MOVE_H_INCLUDED
 
 class Monitor;
+class PathAgent;
+
+class PathAgent {
+public:
+    void nextPosition();
+	void shortestPath();
+};
 
 class SteeringMonitor : Monitor {
 	double velcity[3];
@@ -16,11 +23,7 @@ public:
     static void cancelMove();
 };
 
-class PathAgent {
-public:
-    void nextPosition();
-	void shortestPath();
-};
+
 
 void moveto();
 void moveback();

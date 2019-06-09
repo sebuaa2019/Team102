@@ -1,11 +1,14 @@
 #include <main.hpp>
 #include <voice.hpp>
 #include <start.hpp>
+#include <GrabMonitor.hpp>
 
-// Ìí¼Óº½µã¹Ø¼ü´Ê
+using namespace std;
+
+//æ·»åŠ èˆªç‚¹å…³é”®è¯
 void InitKeyword()
 {
-    arKeyword.push_back("start");   //»úÆ÷ÈË¿ªÊ¼Æô¶¯µÄµØµã,×îºóÒª»ØÈ¥
+    arKeyword.push_back("start");   //æœºå™¨äººå¼€å§‹å¯åŠ¨çš„åœ°ç‚¹,æœ€åè¦å›å»
     arKeyword.push_back("water");
     arKeyword.push_back("tea");
     arKeyword.push_back("cola");
@@ -16,8 +19,8 @@ void InitKeyword()
     arKeyword.push_back("whiskey");
 }
 
-// ´Ó¾ä×ÓÀïÕÒarKeywordÀï´æÔÚµÄ¹Ø¼ü´Ê
-static string FindKeyword(string inSentence)
+// ä»å¥å­é‡Œæ‰¾arKeywordé‡Œå­˜åœ¨çš„å…³é”®è¯
+static std::string FindKeyword(std::string inSentence)
 {
     string res = "";
     int nSize = arKeyword.size();
@@ -33,7 +36,7 @@ static string FindKeyword(string inSentence)
     return res;
 }
 
-// ½«»úÆ÷ÈËµ±Ç°Î»ÖÃ±£´æÎªĞÂº½µã
+// å°†æœºå™¨äººå½“å‰ä½ç½®ä¿å­˜ä¸ºæ–°èˆªç‚¹
 void AddNewWaypoint(std::string inStr)
 {
     tf::TransformListener listener;
@@ -63,7 +66,7 @@ void AddNewWaypoint(std::string inStr)
     ROS_WARN("[New Waypoint] %s ( %.2f , %.2f )" , new_waypoint.name.c_str(), tx, ty);
 }
 
-// ÓïÒôËµ»°
+// è¯­éŸ³è¯´è¯
 void Speak(std::string inStr)
 {
     spk_msg.arg = inStr;
@@ -74,45 +77,49 @@ bool Request::speech(char *fp) {
     Speak(std::string(fp));
 }
 
-// ÓïÒôÊ¶±ğ½á¹û´¦Àíº¯Êı
+void stopFollowAndSetMaster() {
+    FollowSwitch(false, 0);
+    AddNewWaypoint("master");
+    nState = STATE_ASK;
+    nDelay = 0;
+    Speak("OK. What do you want me to fetch?");
+}
+
+// è¯­éŸ³è¯†åˆ«ç»“æœå¤„ç†å‡½æ•°
 void KeywordCB(const std_msgs::String::ConstPtr & msg)
 {
     ROS_WARN("------ Keyword = %s ------",msg->data.c_str());
     if(nState == STATE_FOLLOW)
     {
-        // ´ÓÊ¶±ğ½á¹û¾ä×ÓÖĞ²éÕÒÎïÆ·£¨º½µã£©¹Ø¼ü´Ê
+        // ä»è¯†åˆ«ç»“æœå¥å­ä¸­æŸ¥æ‰¾ç‰©å“ï¼ˆèˆªç‚¹ï¼‰å…³é”®è¯
         string strKeyword = FindKeyword(msg->data);
         int nLenOfKW = strlen(strKeyword.c_str());
         if(nLenOfKW > 0)
         {
-            // ·¢ÏÖÎïÆ·£¨º½µã£©¹Ø¼ü´Ê
+            // å‘ç°ç‰©å“ï¼ˆèˆªç‚¹ï¼‰å…³é”®è¯
             AddNewWaypoint(strKeyword);
             string strSpeak = strKeyword + " . OK. I have memoried. Next one , please"; 
             Speak(strSpeak);
         }
 
-        // Í£Ö¹¸úËæµÄÖ¸Áî
+        // Í£åœæ­¢è·Ÿéšçš„æŒ‡ä»¤
         int nFindIndex = msg->data.find("top follow");
         if(nFindIndex >= 0)
         {
-            FollowSwitch(false, 0);
-            AddNewWaypoint("master");
-            nState = STATE_ASK;
-            nDelay = 0;
-            Speak("OK. What do you want me to fetch?");
+            stopFollowAndSetMaster();
         }
     }
 
     if(nState == STATE_ASK)
     {
-        // ´ÓÊ¶±ğ½á¹û¾ä×ÓÖĞ²éÕÒÎïÆ·£¨º½µã£©¹Ø¼ü´Ê
+        // ä»è¯†åˆ«ç»“æœå¥å­ä¸­æŸ¥æ‰¾ç‰©å“ï¼ˆèˆªç‚¹ï¼‰å…³é”®è¯
         string strKeyword = FindKeyword(msg->data);
-        int nLenOfKW = strlen(strKeyword.c_str());
+        int nLenOfKW = strKeyword.size();
         if(nLenOfKW > 0)
         {
-            // ·¢ÏÖÎïÆ·£¨º½µã£©¹Ø¼ü´Ê
+            // å‘ç°ç‰©å“ï¼ˆèˆªç‚¹ï¼‰å…³é”®è¯
             strGoto = strKeyword;
-            string strSpeak = strKeyword + " . OK. I will go to get it for you."; 
+            std::string strSpeak = strKeyword + " . OK. I will go to get it for you."; 
             Speak(strSpeak);
             nState = STATE_GOTO;
         }

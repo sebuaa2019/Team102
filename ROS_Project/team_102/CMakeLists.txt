@@ -211,9 +211,8 @@ link_directories(
 add_executable(main
   src/main.cpp
   src/move.cpp
-  src/GrabMoniter.cpp 
-  src/ExceptionHandler.cpp 
-  src/GrabMoniter.cpp 
+  src/GrabMonitor.cpp 
+  src/ExceptionHandler.cpp  
   src/start.cpp 
   src/voice.cpp 
 )

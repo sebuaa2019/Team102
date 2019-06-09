@@ -2,11 +2,6 @@
 #include <main.hpp>
 #include <voice.hpp>
 
-ExceptionHandler::ExceptionHandler()
-{
-    //ctor
-}
-
 void ExceptionHandler::MoveExpHandler(int expNum){
     switch(expNum){
 
@@ -35,19 +30,14 @@ void ExceptionHandler::MoveExpHandler(int expNum){
             nState = STATE_ASK;
             break;
             
-        case(FOLLOW_START_EXP)://跟随启动失败
+        case(FOLLOW_START_EXP)://璺熼殢鍚姩澶辫触
             ROS_WARN("[CActionManager] - follow start failed...");
             break;
             
-        case(FOLLOW_STOP_EXP)://跟随终止失败
+        case(FOLLOW_STOP_EXP)://璺熼殢缁堟澶辫触
             ROS_WARN("[CActionManager] - failed to stop following...");
             break;
-        
-        case(VOICE_NOT_GET_TRANSFORM_EXP): // 语音模块中，在使用关键词定位航点时，机器人没有识别出当前的位置 
-        	ROS_ERROR("lookupTransform fail\n");
-        	break;
 
         default: ;
     }
 }
-
