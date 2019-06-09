@@ -8,6 +8,7 @@
 #define FOLLOW_START_EXP        		4
 #define FOLLOW_STOP_EXP         		5
 #define VOICE_NOT_GET_TRANSFORM_EXP 	6
+#define GRAB_FAIL				7
 
 class ExceptionHandler {
 public:
