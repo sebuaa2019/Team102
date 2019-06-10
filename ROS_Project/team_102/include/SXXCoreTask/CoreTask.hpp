@@ -34,6 +34,7 @@ namespace SCT {
     };
 
     class Object {
+        void *p;
     public:
         Object(const Object &o) noexcept;
         Object(Object &&o) noexcept;
