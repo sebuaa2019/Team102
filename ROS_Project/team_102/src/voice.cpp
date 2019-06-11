@@ -2,8 +2,13 @@
 #include <voice.hpp>
 #include <start.hpp>
 #include <GrabMonitor.hpp>
+#include <SXXCoreTask/CoreTask.hpp>
 
 using namespace std;
+
+extern "C" void SCT_main_queue_drain_np();
+
+static SCT::Queue markq = SCT::Queue("com.sxx.mark-block", SCT::Queue::SERIAL); 
 
 //添加航点关键词
 void InitKeyword()
@@ -41,14 +46,30 @@ void AddNewWaypoint(std::string inStr)
 {
     tf::TransformListener listener;
     tf::StampedTransform transform;
-    try
-    {
-        listener.waitForTransform("/map","/base_footprint",  ros::Time(0), ros::Duration(10.0) );
-        listener.lookupTransform("/map","/base_footprint", ros::Time(0), transform);
+
+    volatile bool should_continue = false;
+    volatile bool hasError = false;
+
+    markq.async([&should_continue, &hasError, &listener, &transform] {
+        try
+        {
+            listener.waitForTransform("/map","/base_footprint",  ros::Time(0), ros::Duration(10.0) );
+            listener.lookupTransform("/map","/base_footprint", ros::Time(0), transform);
+        }
+        catch (tf::TransformException &ex) 
+        {
+            ROS_ERROR("[lookupTransform] %s",ex.what());
+            hasError = true;
+            should_continue = true;
+            return;
+        }
+        should_continue = true;
+    });
+
+    while (!should_continue) {
+        SCT_main_queue_drain_np();
     }
-    catch (tf::TransformException &ex) 
-    {
-        ROS_ERROR("[lookupTransform] %s",ex.what());
+    if (hasError) {
         return;
     }
 

@@ -118,7 +118,7 @@ printf("1\n");
             if (lastPalpitateTime == 0) {
                 return;
             }
-            if (current_time - lastPalpitateTime > NSEC_PER_MSEC * 100000) {
+            if (current_time - lastPalpitateTime > NSEC_PER_MSEC * 500) {
                 //timeout
                 printf("Timeout\n");
                 kill(sub_node_pid, SIGSTOP);
