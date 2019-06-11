@@ -233,3 +233,11 @@ add_dependencies(rosStatusChecker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_E
 target_link_libraries(rosStatusChecker
   ${catkin_LIBRARIES}
 )
+
+add_executable(GrabNode
+  src/GrabNode.cpp
+)
+add_dependencies(GrabNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(GrabNode
+  ${catkin_LIBRARIES}
+)
